@@ -1,6 +1,9 @@
 {
 
-	"permissions": ["menus"],
+	"permissions": [
+		"menus", 
+		"storage"
+	],
 
 	"background": {
 		"scripts": ["background.js"]

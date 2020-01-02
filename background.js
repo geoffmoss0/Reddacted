@@ -19,6 +19,8 @@ function connec(p) {
 //browser.runtime.onMessage.addListener(notify);
 browser.runtime.onConnect.addListener(connec);
 
+browser.menus.onClicked.addListener(block);
+
 function notify(message) {
 	console.log("Got message from content script");
 	console.log(message.clicked);
@@ -36,4 +38,24 @@ function notify(message) {
 		});
 	}
 	browser.menus.refresh();
+}
+
+function block(info, tab) {
+	if (info.menuItemId == "block-subreddit") {
+		console.log(info.linkUrl);
+	}
+	let blocked = browser.storage.local.get("subreddits");
+	blocked.then(function(value) {
+		let subs = value.subreddits;
+		if (subs == null) {
+			subs = [];
+		}
+		let name = info.linkUrl.substring(25, info.linkUrl.length - 1);
+		if (!subs.includes(name)) {
+			//for safety
+			subs.push(name);
+		}
+		console.log("new list: " + subs);
+		browser.storage.local.set({subreddits: subs});
+	});
 }

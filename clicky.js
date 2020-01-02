@@ -10,6 +10,17 @@ port.onMessage.addListener(function(m) {
 
 window.addEventListener("contextmenu", rightClick);
 
+document.addEventListener("animationstart", remove);
+
+document.addEventListener("scroll", (event) => {
+	console.log("hey");
+});
+
+function remove(event) {
+	//'div[style=""] > div > div[tabindex="-1"]'
+	let post = document.querySelector("div>div>div[tabindex='-1']");
+	console.log(post);
+}
 
 function rightClick(e) {
 	console.log("click");
