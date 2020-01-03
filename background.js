@@ -21,6 +21,8 @@ browser.runtime.onConnect.addListener(connec);
 
 browser.menus.onClicked.addListener(block);
 
+browser.webRequest.onBeforeRequest.addListener(filter);
+
 function notify(message) {
 	console.log("Got message from content script");
 	console.log(message.clicked);
@@ -58,4 +60,8 @@ function block(info, tab) {
 		console.log("new list: " + subs);
 		browser.storage.local.set({subreddits: subs});
 	});
+}
+
+function filter(content) {
+	
 }

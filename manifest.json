@@ -1,8 +1,10 @@
 {
 
 	"permissions": [
-		"menus", 
-		"storage"
+		"menus",
+		"storage",
+		"*://www.reddit.com/*",
+		"webRequest"
 	],
 
 	"background": {
